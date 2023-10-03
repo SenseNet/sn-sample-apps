@@ -10,7 +10,7 @@ Param(
 	[Parameter(Mandatory = $false)]
 	[string]$TargetPath = "/",
 	[Parameter(Mandatory = $false)]
-	[string]$PATFile = ".\secret-local.json",
+	[string]$PATFile = ".\settings\secret-local.json",
 	[Parameter(Mandatory = $false)]
 	[string]$execFile = ".\tools\SnIO.exe",
 	[Parameter(Mandatory = $false)] 
