@@ -1,0 +1,8 @@
+{
+  "ContentType": "ParkingPlace",
+  "ContentName": "p3",
+  "Fields": {
+    "Name": "p3",
+	"ParkingPlaceCode": "P3"
+  }
+}

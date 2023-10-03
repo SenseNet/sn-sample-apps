@@ -1,0 +1,13 @@
+{
+  "ContentType": "Workspace",
+  "ContentName": "sample",
+  "Fields": {
+    "Name": "sample",
+    "DisplayName": "sample",
+	"AllowedChildTypes": [
+      "Folder",
+      "SystemFolder",
+      "SampleContainer"
+    ]
+  }
+}
