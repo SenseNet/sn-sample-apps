@@ -1,0 +1,28 @@
+{
+  "columns": [
+    {
+      "field": "DisplayName",
+      "title": "Display name"
+    },
+    {
+      "field": "ParkingPlace/ParkingPlaceCode",
+      "title": "Parking place"
+    },
+    {
+      "field": "ParkingPlaceUser",
+      "title": "User"
+    },
+    {
+      "field": "ParkingPlaceBookingStart",
+      "title": "Start"
+    },
+    {
+      "field": "ParkingPlaceBookingEnd",
+      "title": "End"
+    },
+    {
+      "field": "Actions",
+      "title": "Actions"
+    }
+  ]
+}

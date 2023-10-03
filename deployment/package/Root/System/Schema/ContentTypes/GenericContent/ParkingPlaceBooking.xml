@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentType name="ParkingPlaceBooking" parentType="GenericContent" handler="SenseNet.ContentRepository.GenericContent" xmlns="http://schemas.sensenet.com/SenseNet/ContentRepository/ContentTypeDefinition">
+	<DisplayName>Parking place booking</DisplayName>
+	<Description>A content that represents booking of a parking place.</Description>
+	<Icon>File</Icon>
+	<Fields>
+		<Field name="ParkingPlace" type="Reference">
+			<DisplayName>Parking place</DisplayName>
+			<Description>The parking place to book</Description>
+			<Configuration>
+				<Compulsory>true</Compulsory>
+				<FieldIndex>20200</FieldIndex>
+				<AllowMultiple>false</AllowMultiple>
+				<AllowedTypes>
+					<Type>ParkingPlace</Type>
+				</AllowedTypes>
+				<SelectionRoot>
+					<Path>/Root/Content/sample/parkingplaces</Path>
+				</SelectionRoot>
+			</Configuration>
+		</Field>
+		<Field name="ParkingPlaceUser" type="Reference">
+			<DisplayName>User</DisplayName>
+			<Description>The user who books the parking place</Description>
+			<Configuration>
+				<Compulsory>true</Compulsory>
+				<FieldIndex>20180</FieldIndex>
+				<AllowMultiple>false</AllowMultiple>
+				<AllowedTypes>
+					<Type>User</Type>
+				</AllowedTypes>
+				<SelectionRoot>
+					<Path>/Root/IMS</Path>
+				</SelectionRoot>
+			</Configuration>
+		</Field>
+		<Field name="ParkingPlaceBookingStart" type="DateTime">
+			<DisplayName>Start date</DisplayName>
+			<Description>Starting day of the booking period</Description>
+			<Configuration>
+				<DateTimeMode>Date</DateTimeMode>
+				<Compulsory>false</Compulsory>
+				<DefaultValue>@@Tomorrow@@</DefaultValue>
+			</Configuration>
+		</Field>
+		<Field name="ParkingPlaceBookingEnd" type="DateTime">
+			<DisplayName>End date</DisplayName>
+			<Description>Ending day of the booking period</Description>
+			<Configuration>
+				<DateTimeMode>Date</DateTimeMode>
+				<Compulsory>false</Compulsory>
+				<DefaultValue>@@Tomorrow@@</DefaultValue>
+			</Configuration>
+		</Field>
+		<!---->
+		<Field name="Name" type="ShortText">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="DisplayName" type="ShortText">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="Description" type="RichText">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="Version" type="Version">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="EnableLifespan" type="Boolean">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="ValidFrom" type="DateTime">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="ValidTill" type="DateTime">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+		<Field name="Index" type="Integer">
+			<Configuration>
+				<VisibleBrowse>Hide</VisibleBrowse>
+				<VisibleEdit>Hide</VisibleEdit>
+				<VisibleNew>Hide</VisibleNew>
+			</Configuration>
+		</Field>
+	</Fields>
+</ContentType>

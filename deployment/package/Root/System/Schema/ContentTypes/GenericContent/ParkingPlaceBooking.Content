@@ -1,0 +1,9 @@
+{
+  "ContentType": "ContentType",
+  "ContentName": "ParkingPlaceBooking",
+  "Fields": {
+    "Binary": {
+      "Attachment": "ParkingPlaceBooking.xml"
+    }
+  }
+}

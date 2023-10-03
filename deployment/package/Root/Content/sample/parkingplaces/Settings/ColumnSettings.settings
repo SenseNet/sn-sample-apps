@@ -1,0 +1,16 @@
+{
+  "columns": [
+    {
+        "field": "DisplayName",
+        "title": "Display name"
+    },
+    {
+      "field": "ParkingPlaceCode",
+      "title": "Parking place code"
+    },
+    {
+      "field": "Actions",
+      "title": "Actions"
+    }
+  ]
+}
