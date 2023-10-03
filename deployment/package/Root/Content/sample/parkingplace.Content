@@ -1,0 +1,13 @@
+{
+  "ContentType": "SampleContainer",
+  "ContentName": "parkingplace",
+  "Fields": {
+    "Name": "parkingplace",
+    "DisplayName": "Parking place booking",
+	"AllowedChildTypes": [
+      "Folder",
+      "SystemFolder",
+      "SampleContainer"
+    ]
+  }
+}

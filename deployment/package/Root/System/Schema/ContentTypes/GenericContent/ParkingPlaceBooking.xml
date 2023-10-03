@@ -15,7 +15,7 @@
 					<Type>ParkingPlace</Type>
 				</AllowedTypes>
 				<SelectionRoot>
-					<Path>/Root/Content/sample/parkingplaces</Path>
+					<Path>/Root/Content/sample/parkingplace/parkingplaces</Path>
 				</SelectionRoot>
 			</Configuration>
 		</Field>
