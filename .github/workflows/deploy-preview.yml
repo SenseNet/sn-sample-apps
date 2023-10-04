@@ -38,8 +38,14 @@ jobs:
 
       - name: install
         run: yarn install
-        env:
-          CYPRESS_INSTALL_BINARY: 0
+        working-directory: ./src/parking-place/next-react-app       
 
       - name: build
         run: yarn build
+        working-directory: ./src/parking-place/next-react-app
+
+      - name: build
+        run: yarn next build
+        working-directory: ./src/parking-place/next-react-app
+      
+      
