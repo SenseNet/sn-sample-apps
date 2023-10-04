@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# sensenet local files and folders
+secret-local.json
+secret-test.json
+secret-staging.json
+deployment/tools/*

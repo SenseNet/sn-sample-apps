@@ -1,0 +1,9 @@
+{
+  "ContentType": "ContentType",
+  "ContentName": "SampleContainer",
+  "Fields": {
+    "Binary": {
+      "Attachment": "SampleContainer.xml"
+    }
+  }
+}

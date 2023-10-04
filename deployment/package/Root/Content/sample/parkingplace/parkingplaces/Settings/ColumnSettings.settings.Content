@@ -1,0 +1,10 @@
+{
+  "ContentType": "Settings",
+  "ContentName": "ColumnSettings.settings",
+  "Fields": {
+    "Name": "ColumnSettings.settings",
+	"Binary": {
+      "Attachment": "ColumnSettings.settings"
+    }
+  }
+}
