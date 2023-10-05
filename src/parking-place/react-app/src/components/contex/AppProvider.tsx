@@ -38,13 +38,12 @@ export const AuthProvider = ({ children }: contextProps) => {
 };
 export const RepositoryProvider = ({ children }: contextProps) => {
   const { oidcUser } = useOidcAuthentication();
-  const { login } = useOidcAuthentication();
-  if (!oidcUser) {
-    return <button onClick={login}>Login</button>;
-  }
+
   return (
     <RepositoryContext.Provider
-      value={new Repository({ repositoryUrl, token: oidcUser.access_token })}
+      value={
+        new Repository({ repositoryUrl, token: oidcUser?.access_token || "" })
+      }
     >
       {children}
     </RepositoryContext.Provider>
