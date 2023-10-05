@@ -38,14 +38,17 @@ jobs:
 
       - name: install
         run: yarn install
-        working-directory: ./src/parking-place/next-react-app       
+        working-directory: ./src/parking-place/react-app       
 
       - name: build
         run: yarn build
-        working-directory: ./src/parking-place/next-react-app
+        working-directory: ./src/parking-place/react-app
 
-      - name: build
-        run: yarn next build
-        working-directory: ./src/parking-place/next-react-app
-      
-      
+      - name: wake up deploy notifier
+        run: yarn wait-on https://sensenet-sn-deploy-notifier.glitch.me/ -l -t 300000 -i 10000
+
+      # - name: Publish
+      #   run: npx netlify-cli@v2.41.0 deploy --dir=./src/parking-place/react-app/build --message ${{ github.event.pull_request.number }}
+      #   env:
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
