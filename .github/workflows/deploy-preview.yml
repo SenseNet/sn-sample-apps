@@ -52,5 +52,5 @@ jobs:
             npx netlify-cli@v2.41.0 deploy --dir=./src/parking-place/react-app/build --message ${{ github.sha }}
           fi
         env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: ${{ vars.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
