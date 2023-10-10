@@ -38,6 +38,7 @@ const theme = createTheme({
   sizes: {
     desktopMaxWidth: "1280px",
     navbarHeight: "64px",
+    contentWidth: "1024px",
   },
   spacing: 5,
 });

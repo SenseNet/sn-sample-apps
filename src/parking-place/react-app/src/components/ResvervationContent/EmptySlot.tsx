@@ -5,11 +5,12 @@ import { Box } from "@mui/material";
 
 type EmptySlotProps = {
   id: number;
+  displayName: string;
 };
 
-function EmptySlot({ id }: EmptySlotProps) {
+function EmptySlot({ id, displayName }: EmptySlotProps) {
   const styles = UseStyles(EmptySlotStyles);
-  return <Box sx={styles.root}>0{id}</Box>;
+  return <Box sx={styles.root}>{displayName}</Box>;
 }
 
 export default EmptySlot;

@@ -12,6 +12,7 @@
     "@sensenet/authentication-oidc-react": "^2.3.1",
     "@sensenet/client-core": "^4.1.0",
     "@sensenet/hooks-react": "^1.6.3",
+    "@tanstack/react-query": "^4.35.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -53,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^4.36.0"
   }
 }

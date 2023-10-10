@@ -5,12 +5,14 @@ declare module "@mui/material/styles" {
   interface Theme {
     sizes: {
       desktopMaxWidth: React.CSSProperties["width"];
+      contentWidth: React.CSSProperties["width"];
       navbarHeight: React.CSSProperties["height"];
     };
   }
   interface ThemeOptions {
     sizes: {
       desktopMaxWidth: React.CSSProperties["width"];
+      contentWidth: React.CSSProperties["width"];
       navbarHeight: React.CSSProperties["height"];
     };
   }

@@ -8,11 +8,26 @@ import { DatePickerStyles } from "./stlyes";
 
 dayjs.locale("en-gb");
 
-export default function DatePicker() {
+type datePickerProps = {
+  selectedDate: dayjs.Dayjs;
+  setSelectedDate: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+};
+
+export default function DatePicker({
+  selectedDate,
+  setSelectedDate,
+}: datePickerProps) {
   const styles = UseStyles(DatePickerStyles);
+
+  const handleDateChange = async (date: dayjs.Dayjs | null) => {
+    setSelectedDate(dayjs(date));
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <StaticDatePicker
+        value={selectedDate}
+        onChange={handleDateChange}
         sx={styles.root}
         slotProps={{
           toolbar: { hidden: true },

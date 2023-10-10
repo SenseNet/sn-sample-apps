@@ -17,6 +17,12 @@ export const ReservationStyles = (
     rowGap: theme.spacing(9),
     alignItems: "center",
     marginInline: "15px",
+    [theme.breakpoints.up("md")]: {
+      width: "786px",
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: theme.sizes.contentWidth,
+    },
     "& h1": {
       marginTop: 0,
       marginBottom: 0,
@@ -27,6 +33,9 @@ export const ReservationStyles = (
       rowGap: theme.spacing(3),
       [theme.breakpoints.up("md")]: {
         flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+        maxWidth: 700,
       },
     },
   },
@@ -60,6 +69,10 @@ export const ParkingSlotsStyles = (
     gridTemplateColumns: "repeat(2, 1fr)",
     justifyItems: "center",
     rowGap: "10px",
+    alignContent: "center",
+    [theme.breakpoints.up("md")]: {
+      columnGap: theme.spacing(4),
+    },
     "& .slot:not(:nth-of-type(7),:nth-of-type(8))": {
       width: "100%",
       display: "flex",
