@@ -8,6 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ParkingPlaceService>();
+builder.Services.Configure<ParkingPlaceOptions>(options => 
+    builder.Configuration.Bind("ParkingPlace", options));
 
 builder.Services.AddSenseNetClientWithUserRepositories(options =>
     {
@@ -16,7 +18,8 @@ builder.Services.AddSenseNetClientWithUserRepositories(options =>
     contentTypes =>
     {
         contentTypes.Add<ParkingPlaceBooking>();
-    });
+    })
+    .AddSenseNetEmailSender(options => builder.Configuration.Bind("sensenet:Email", options));
 
 var app = builder.Build();
 

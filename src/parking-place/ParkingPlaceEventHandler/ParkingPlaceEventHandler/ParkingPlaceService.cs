@@ -1,17 +1,26 @@
-﻿using SenseNet.Client;
+﻿using Microsoft.Extensions.Options;
+using SenseNet.Client;
 using SenseNet.Client.WebApi;
+using SenseNet.Tools.Mail;
 
 namespace ParkingPlaceEventHandler;
 
 public class ParkingPlaceService
 {
     private readonly IUserRepositoryCollection _repositories;
+    private readonly IEmailSender _emailSender;
+    private readonly ParkingPlaceOptions _options;
     private readonly ILogger<ParkingPlaceService> _logger;
 
-    public ParkingPlaceService(IUserRepositoryCollection repositories, ILogger<ParkingPlaceService> logger)
+    public ParkingPlaceService(IUserRepositoryCollection repositories, 
+        IEmailSender emailSender,
+        IOptions<ParkingPlaceOptions> options,
+        ILogger<ParkingPlaceService> logger)
     {
         _logger = logger;
         _repositories = repositories;
+        _emailSender = emailSender;
+        _options = options.Value;
     }
 
     public async Task HandlePostAsync(ParkingPlaceChanged value, HttpContext httpContext)
@@ -28,9 +37,28 @@ public class ParkingPlaceService
         var repository = await _repositories.GetAdminRepositoryAsync(cancel);
 
         ParkingPlaceBooking? currentBooking;
+
         try
         {
-            currentBooking = await repository.LoadContentAsync<ParkingPlaceBooking>(value.Path, cancel);
+            currentBooking = await repository.LoadContentAsync<ParkingPlaceBooking>(new LoadContentRequest
+            {
+                Path = value.Path,
+                Select = new []{"Id", "Path", "Type",
+                    "ParkingPlaceBookingStart",
+                    "ParkingPlaceBookingEnd",
+                    "ParkingPlaceUser/Id", 
+                    "ParkingPlaceUser/Path",
+                    "ParkingPlaceUser/Name",
+                    "ParkingPlaceUser/FullName",
+                    "ParkingPlaceUser/Type",
+                    "ParkingPlace/Id",
+                    "ParkingPlace/Path",
+                    "ParkingPlace/Type",
+                    "ParkingPlace/ParkingPlaceCode",
+                    "ParkingPlace/DisplayName"
+                },
+                Expand = new []{ "ParkingPlaceUser", "ParkingPlace" }
+            }, cancel);
         }
         catch (Exception ex)
         {
@@ -51,7 +79,7 @@ public class ParkingPlaceService
         if (bookings < parkingPlaces)
             return;
 
-        await SendMailAsync(parkingPlaces, startDate, cancel);
+        await SendMailAsync(parkingPlaces, currentBooking, cancel);
     }
 
     private async Task<int> GetCountOfParkingPlacesAsync(IRepository repository, CancellationToken cancel)
@@ -78,8 +106,26 @@ public class ParkingPlaceService
     }
 
 
-    private async Task SendMailAsync(int contentCount, DateTime date, CancellationToken cancel)
+    private async Task SendMailAsync(int contentCount, ParkingPlaceBooking currentBooking, 
+        CancellationToken cancel)
     {
-        _logger.LogInformation("Sending mail to Parking Place Administrator about overloading (not implemented).");
+        var dateText = currentBooking.ParkingPlaceBookingStart.Date.ToString("yyyy-MM-dd");
+
+        if (!string.IsNullOrEmpty(_options.AdminEmail))
+        {
+            _logger.LogInformation("Day {date} is fully booked. " +
+                                   "Sending mail to Parking Place Administrator.", dateText);
+
+            await _emailSender.SendAsync(_options.AdminEmail, "Parking Place Admin",
+                $"Parking Place - day {dateText} is fully booked.",
+                $"All {contentCount} parking places for {dateText} are booked. " +
+                $"Last booking was made for {currentBooking.ParkingPlaceUser["FullName"]}", cancel);
+        }
+        else
+        {
+            _logger.LogInformation("Day {date} is fully booked. " +
+                                   "Cannot send email to Parking Place Administrator because " +
+                                   "no admin email is configured.", dateText);
+        }
     }
 }

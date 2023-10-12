@@ -8,4 +8,6 @@ public class ParkingPlaceBooking : Content
 
     public DateTime ParkingPlaceBookingStart { get; set; }
     public DateTime ParkingPlaceBookingEnd { get; set; }
+    public Content ParkingPlaceUser { get; set; }
+    public Content ParkingPlace { get; set; }
 }
