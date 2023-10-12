@@ -1,6 +1,6 @@
 {
   "ContentType": "WebHookSubscription",
-  "ContentName": "RentAParkingPlace",
+  "ContentName": "ParkingPlaceBooked",
   "Fields": {
     "WebHookHttpMethod": [
       "POST"

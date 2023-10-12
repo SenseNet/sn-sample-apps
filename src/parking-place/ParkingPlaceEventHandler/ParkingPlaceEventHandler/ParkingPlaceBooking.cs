@@ -8,5 +8,4 @@ public class ParkingPlaceBooking : Content
 
     public DateTime ParkingPlaceBookingStart { get; set; }
     public DateTime ParkingPlaceBookingEnd { get; set; }
-
 }
