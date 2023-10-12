@@ -1,0 +1,21 @@
+{
+  "ContentType": "ItemList",
+  "ContentName": "WebHooks",
+  "Fields": {
+    "OwnerWhenVisitor": [
+      "/Root/IMS/BuiltIn/Portal/Admin"
+    ],
+    "ContentListDefinition": "<ContentListDefinition xmlns='http://schemas.sensenet.com/SenseNet/ContentRepository/ContentListDefinition'><Fields /></ContentListDefinition>",
+    "AvailableViews": [],
+    "FieldSettingContents": [],
+    "OverwriteFiles": false,
+    "GroupAttachments": [],
+    "SaveOriginalEmail": false,
+    "IncomingEmailWorkflow": [],
+    "OnlyFromLocalGroups": false,
+    "AllowedChildTypes": [
+      "SystemFolder",
+      "WebHookSubscription"
+    ]
+  }
+}
