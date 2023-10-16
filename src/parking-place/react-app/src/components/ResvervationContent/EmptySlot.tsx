@@ -18,7 +18,7 @@ function EmptySlot({ id, displayName, parkingPlaceCode, setSelectedSlot }: Empty
   }
 
   return (
-    <Box sx={styles.root} onClick={() => handleSlotSelection(parkingPlaceCode)}>
+    <Box sx={styles.root} onClick={() => handleSlotSelection(id)}>
       {parkingPlaceCode}
     </Box>
   );

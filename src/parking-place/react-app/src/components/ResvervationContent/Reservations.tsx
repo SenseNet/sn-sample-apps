@@ -4,19 +4,15 @@ import { ReservationStyles } from "./stlyes";
 import { Box } from "@mui/material";
 import ParkingSlots from "./ParkingSlots";
 import Confirm from "./Confirm";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import dayjs from "dayjs";
-import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 function Reservations() {
   const styles = UseStyles(ReservationStyles);
-  const { oidcUser } = useOidcAuthentication();
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
     dayjs(new Date())
   );
-
-  const reserveButton = oidcUser && <Confirm selectedSlot={selectedSlot} />;
 
   return (
     <Box sx={styles.content} className="content">
@@ -28,7 +24,7 @@ function Reservations() {
         />
         <ParkingSlots setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />
       </div>
-      {reserveButton}
+      <Confirm selectedSlot={selectedSlot} selectedDate={selectedDate} />;
     </Box>
   );
 }
