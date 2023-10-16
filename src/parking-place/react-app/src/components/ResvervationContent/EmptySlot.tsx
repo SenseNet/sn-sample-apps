@@ -6,11 +6,22 @@ import { Box } from "@mui/material";
 type EmptySlotProps = {
   id: number;
   displayName: string;
+  parkingPlaceCode: string;
+  setSelectedSlot: (slot: any) => void;
 };
 
-function EmptySlot({ id, displayName }: EmptySlotProps) {
+function EmptySlot({ id, displayName, parkingPlaceCode, setSelectedSlot }: EmptySlotProps) {
   const styles = UseStyles(EmptySlotStyles);
-  return <Box sx={styles.root}>{displayName}</Box>;
+
+  function handleSlotSelection(slot: any) {
+    setSelectedSlot(slot);
+  }
+
+  return (
+    <Box sx={styles.root} onClick={() => handleSlotSelection(parkingPlaceCode)}>
+      {parkingPlaceCode}
+    </Box>
+  );
 }
 
 export default EmptySlot;

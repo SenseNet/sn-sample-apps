@@ -13,6 +13,7 @@ import { setDate } from "date-fns";
 
 type ParkingSlotsProps = {
   selectedDate: dayjs.Dayjs;
+  setSelectedSlot: (slot: any) => void;
 };
 
 type ReservationsCollectionT = {
@@ -39,9 +40,9 @@ type SlotData = SlotsCollectionT & {
   reserved?: boolean;
 };
 
-function ParkingSlots({ selectedDate }: ParkingSlotsProps) {
+function ParkingSlots({ selectedDate, setSelectedSlot }: ParkingSlotsProps) {
   const repo = useRepository();
-
+  
   const [data, setData] = useState<Array<SlotData>>([]);
 
   useEffect(() => {
@@ -124,7 +125,7 @@ function ParkingSlots({ selectedDate }: ParkingSlotsProps) {
             {slot.reserved ? (
               <ReservedCard />
             ) : (
-              <EmptySlot id={slot.Id} displayName={slot.DisplayName} />
+              <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} setSelectedSlot={setSelectedSlot} />
             )}
           </div>
         );
