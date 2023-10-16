@@ -13,6 +13,7 @@ import { setDate } from "date-fns";
 
 type ParkingSlotsProps = {
   selectedDate: dayjs.Dayjs;
+  selectedSlot: any;
   setSelectedSlot: (slot: any) => void;
 };
 
@@ -40,7 +41,7 @@ type SlotData = SlotsCollectionT & {
   reserved?: boolean;
 };
 
-function ParkingSlots({ selectedDate, setSelectedSlot }: ParkingSlotsProps) {
+function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot }: ParkingSlotsProps) {
   const repo = useRepository();
   
   const [data, setData] = useState<Array<SlotData>>([]);
@@ -114,7 +115,7 @@ function ParkingSlots({ selectedDate, setSelectedSlot }: ParkingSlotsProps) {
     };
 
     parkingSLots();
-  }, [repo, selectedDate]);
+  }, [repo, selectedSlot, selectedDate]);
 
   const styles = UseStyles(ParkingSlotsStyles);
   return (

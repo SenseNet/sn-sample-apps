@@ -22,7 +22,7 @@ function Reservations() {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <ParkingSlots setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />
+        <ParkingSlots selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />
       </div>
       <Confirm selectedSlot={selectedSlot} resetSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />;
     </Box>
