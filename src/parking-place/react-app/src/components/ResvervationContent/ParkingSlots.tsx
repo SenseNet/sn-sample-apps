@@ -98,7 +98,7 @@ function ParkingSlots({ selectedDate }: ParkingSlotsProps) {
       // );
       // console.log('filteredReservations', filteredReservations)
 
-      /*set slots item reserved property to true where reservations.d.results.ParkingPlace array have an element with the same ParkingPalceCode*/
+      // set reserved slots
       const updatedSlots = slots.d.results.map((slot) => {
         const reservation = reservations.d.results.find(
           (r) => r.ParkingPlace.ParkingPlaceCode === slot.ParkingPlaceCode
