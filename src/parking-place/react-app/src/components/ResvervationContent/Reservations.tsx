@@ -6,13 +6,17 @@ import ParkinkSlots from "./ParkingSlots";
 import Confirm from "./Confirm";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 function Reservations() {
   const styles = UseStyles(ReservationStyles);
+  const { oidcUser } = useOidcAuthentication();
 
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
     dayjs(new Date())
   );
+
+  const reserveButton = oidcUser && <Confirm />;
 
   return (
     <Box sx={styles.content} className="content">
@@ -24,7 +28,7 @@ function Reservations() {
         />
         <ParkinkSlots selectedDate={selectedDate} />
       </div>
-      <Confirm />
+      {reserveButton}
     </Box>
   );
 }
