@@ -20,10 +20,10 @@ type ReservationsCollectionT = {
   Path: string;
   Name: string;
   Type: string;
-  ParkingPlace: string;
+  ParkingPlace: any;
   User: string;
-  StartDate: string;
-  EndDate: string;
+  ParkingPlaceBookingStart: string;
+  ParkingPlaceBookingEnd: string;  
 };
 
 type SlotsCollectionT = {
@@ -61,49 +61,61 @@ function ParkingSlots({ selectedDate }: ParkingSlotsProps) {
           enableautofilters: true,
         },
       });
+      console.log('slots', slots.d.results)
 
       const reservations = await repo.loadCollection<ReservationsCollectionT>({
         path: "/Root/Content/sample/parkingplace/bookings",
         requestInit: {
           signal: ac.signal,
         },
-
         oDataOptions: {
-          select: ["ParkingPlace", "StartDate", "EndDate", "User"],
+          select: ["ParkingPlace", "ParkingPlaceBookingStart", "User"],
           expand: ["ParkingPlace"],
-          query: `StartDate:>'${selectedDate.format(
+          query: `ParkingPlaceBookingStart:['${selectedDate.format(
             "YYYY-MM-DD 00:00:00"
-          )}' AND StartDate:<'${selectedDate
+          )}' TO '${selectedDate
             .add(1, "day")
-            .format("YYYY-MM-DD 00:00:00")}'`,
+            .format("YYYY-MM-DD 00:00:00")}'}`,
           enableautofilters: true,
         },
       });
+      console.log('reservations', reservations.d.results)
 
       /*filter restion.d.result with StartDate equal selected date*/
 
-      const filteredReservations = reservations.d.results.filter(
-        (reservation) => {
-          console.log({
-            reservation: reservation.StartDate,
-            selectedDate: selectedDate.format("YYYY-MM-DD"),
-          });
+      //  const filteredReservations = reservations.d.results.filter(
+      //   (reservation) => {
+      //     console.log({
+      //       reservation: reservation.StartDate,
+      //       selectedDate: selectedDate.format("YYYY-MM-DD"),
+      //     });
 
-          return (
-            dayjs(reservation.StartDate).format("YYYY-MM-DD") ===
-            selectedDate.format("YYYY-MM-DD")
-          );
-        }
-      );
+      //     return (
+      //       dayjs(reservation.StartDate).format("YYYY-MM-DD") ===
+      //       selectedDate.format("YYYY-MM-DD")
+      //     );
+      //   }
+      // );
+      // console.log('filteredReservations', filteredReservations)
 
-      setData(slots.d.results);
+      /*set slots item reserved property to true where reservations.d.results.ParkingPlace array have an element with the same ParkingPalceCode*/
+      const updatedSlots = slots.d.results.map((slot) => {
+        const reservation = reservations.d.results.find(
+          (r) => r.ParkingPlace.ParkingPlaceCode === slot.ParkingPlaceCode
+        );
+        return {
+          ...slot,
+          reserved: !!reservation,
+        };
+      });
+
+      setData(updatedSlots);
     };
 
     parkingSLots();
   }, [repo, selectedDate]);
 
   const styles = UseStyles(ParkingSlotsStyles);
-
   return (
     <Box sx={styles.root}>
       {data?.map((slot) => {
