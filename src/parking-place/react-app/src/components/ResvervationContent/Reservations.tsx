@@ -24,7 +24,7 @@ function Reservations() {
         />
         <ParkingSlots setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />
       </div>
-      <Confirm selectedSlot={selectedSlot} selectedDate={selectedDate} />;
+      <Confirm selectedSlot={selectedSlot} resetSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />;
     </Box>
   );
 }

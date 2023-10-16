@@ -8,6 +8,7 @@ import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 type ConfirmProps = {
   selectedSlot: any;
+  resetSelectedSlot: (slot: any) => void;
   selectedDate: any;
 };
 
@@ -23,7 +24,7 @@ function Confirm(props: ConfirmProps) {
     ParkingPlaceUser: any;
   }
 
-  async function updateReservation(selectedSlot: any) {
+  async function updateReservation(selectedSlot: any, resetSelectedSlot: any) {
     const response = await repository.post<ParkingPlaceBookingContent>({
       parentPath: "/Root/Content/sample/parkingplace/bookings",
       contentType: 'ParkingPlaceBooking',      
@@ -32,21 +33,24 @@ function Confirm(props: ConfirmProps) {
         ParkingPlaceBookingStart: props.selectedDate,
         // ParkingPlaceUser: ?
       },
+    }).then(() => {
+      resetSelectedSlot(null);
     });
     console.log(response);
   }
 
   function handleConfirmation() {
-    updateReservation(props.selectedSlot);
+    updateReservation(props.selectedSlot, props.resetSelectedSlot);
   }
   
   console.log('to be confirmed:', props.selectedSlot, props.selectedDate);
 
   if (!oidcUser) return null;
-  console.log('user:', oidcUser);
-    
+      
   return (
-    <Box sx={styles.root} onClick={handleConfirmation}>
+    <Box sx={styles.root}
+      onClick={props.selectedSlot ? handleConfirmation : undefined}
+      className={props.selectedSlot ? "" : "disabled"}>
       Confirm
     </Box>
   );
