@@ -126,7 +126,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot }: ParkingSl
             {slot.reserved ? (
               <ReservedCard />
             ) : (
-              <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} setSelectedSlot={setSelectedSlot} />
+              <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
             )}
           </div>
         );

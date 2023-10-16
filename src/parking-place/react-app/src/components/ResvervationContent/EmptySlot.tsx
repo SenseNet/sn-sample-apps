@@ -7,10 +7,11 @@ type EmptySlotProps = {
   id: number;
   displayName: string;
   parkingPlaceCode: string;
+  selectedSlot: number;
   setSelectedSlot: (slot: any) => void;
 };
 
-function EmptySlot({ id, displayName, parkingPlaceCode, setSelectedSlot }: EmptySlotProps) {
+function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot }: EmptySlotProps) {
   const styles = UseStyles(EmptySlotStyles);
 
   function handleSlotSelection(slot: any) {
@@ -18,7 +19,13 @@ function EmptySlot({ id, displayName, parkingPlaceCode, setSelectedSlot }: Empty
   }
 
   return (
-    <Box sx={styles.root} onClick={() => handleSlotSelection(id)}>
+    <Box 
+      // sx={styles.root} 
+      sx={{
+        ...styles.root,
+        ...(id === selectedSlot ? {borderColor:"darkcyan", color:"darkcyan"} : {}),
+      }}
+      onClick={() => handleSlotSelection(id)}>
       {parkingPlaceCode}
     </Box>
   );
