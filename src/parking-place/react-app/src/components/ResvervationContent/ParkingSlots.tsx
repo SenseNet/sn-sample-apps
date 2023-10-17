@@ -47,6 +47,10 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot }: ParkingSl
   const [data, setData] = useState<Array<SlotData>>([]);
 
   useEffect(() => {
+    setSelectedSlot(null);
+  }, [selectedDate, setSelectedSlot]);
+
+  useEffect(() => {
     const ac = new AbortController();
 
     const parkingSLots = async () => {
