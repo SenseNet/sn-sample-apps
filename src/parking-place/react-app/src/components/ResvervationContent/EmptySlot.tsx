@@ -2,6 +2,7 @@ import React from "react";
 import { UseStyles } from "../../hooks/useStyles";
 import { EmptySlotStyles } from "./stlyes";
 import { Box } from "@mui/material";
+import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 type EmptySlotProps = {
   id: number;
@@ -13,7 +14,8 @@ type EmptySlotProps = {
 
 function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot }: EmptySlotProps) {
   const styles = UseStyles(EmptySlotStyles);
-
+  const { oidcUser } = useOidcAuthentication();
+  
   function handleSlotSelection(slot: any) {
     setSelectedSlot(slot);
   }
@@ -24,8 +26,11 @@ function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelecte
       sx={{
         ...styles.root,
         ...(id === selectedSlot ? {borderColor:"darkcyan", color:"darkcyan"} : {}),
+        '&:hover': {
+          cursor: 'pointer',
+        },
       }}
-      onClick={() => handleSlotSelection(id)}>
+      onClick={() => oidcUser?handleSlotSelection(id):null}>
       {parkingPlaceCode}
     </Box>
   );

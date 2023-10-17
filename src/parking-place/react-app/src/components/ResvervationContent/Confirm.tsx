@@ -48,7 +48,14 @@ function Confirm(props: ConfirmProps) {
   if (!oidcUser) return null;
       
   return (
-    <Box sx={styles.root}
+    <Box 
+      sx={{
+        ...styles.root,
+        ...(props.selectedSlot ? {} : { pointerEvents: 'none' }),
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      }}
       onClick={props.selectedSlot ? handleConfirmation : undefined}
       className={props.selectedSlot ? "" : "disabled"}>
       Confirm
