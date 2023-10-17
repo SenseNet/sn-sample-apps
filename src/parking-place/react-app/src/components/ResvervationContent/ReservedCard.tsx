@@ -6,6 +6,7 @@ import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 type ReservedSlotProps = {
   id: number | undefined;
+  ownReservation: boolean;
   displayName: string;
   parkingPlaceCode: string;
   reservedByName: string | undefined;
@@ -14,7 +15,7 @@ type ReservedSlotProps = {
   setSelectedSlot: (slot: number) => void;
 };
 
-function ReservedCard({ id, reservedByName, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot, setSelectedAction}: ReservedSlotProps) {
+function ReservedCard({ id, ownReservation, reservedByName, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot, setSelectedAction}: ReservedSlotProps) {
   const styles = UseStyles(ReservedCardSlotStyle);
   const { oidcUser } = useOidcAuthentication();
   
@@ -22,7 +23,11 @@ function ReservedCard({ id, reservedByName, displayName, parkingPlaceCode, selec
     setSelectedSlot(slot);
     setSelectedAction("cancel");
   }
-  
+
+  function colorizeSvg(selected: boolean, ownReservation: boolean) {
+    return (selected ? 'contrast(50%)' : '') + (ownReservation ? ' invert(1%) sepia(10%) saturate(1352%) hue-rotate(87deg) brightness(119%)' : '');
+  }
+
   return (
     <Box 
       sx={{
@@ -40,7 +45,7 @@ function ReservedCard({ id, reservedByName, displayName, parkingPlaceCode, selec
         height={50}
         width={110}
         style={{
-          filter: id === selectedSlot ? 'contrast(50%)' : '',
+            filter: colorizeSvg(id === selectedSlot, ownReservation),
         }}
         title={reservedByName}
       />      

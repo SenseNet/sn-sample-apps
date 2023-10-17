@@ -43,11 +43,12 @@ type SlotData = SlotsCollectionT & {
   reservationId?: number;
   reservedBy?: number;
   reservedByName?: string;
+  ownReservation: boolean;
 };
 
 function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction}: ParkingSlotsProps) {
   const repo = useRepository();
-  
+
   const [data, setData] = useState<Array<SlotData>>([]);
 
   useEffect(() => {
@@ -56,10 +57,21 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
 
   useEffect(() => {
     const ac = new AbortController();
-
+    let currentUserId = 0;
     const parkingSLots = async () => {
-      /*Fetch parking Slots*/
-
+      const domain = repo.configuration.repositoryUrl;      
+      const userResponse = await fetch(`${domain}/odata.svc/content(2)/GetCurrentUser?metadata=no&$Select=Id,DisplayName`, {
+        headers: {
+          Authorization: `Bearer ${repo.configuration.token}`,
+        },
+      });
+      await userResponse.json().then(rp => {
+        const currentUser = rp.d;
+        currentUserId = currentUser.Id;
+        // setCurrentUser(currentUser);
+        console.log(currentUser);
+      });      
+      
       const slots = await repo.loadCollection<SlotsCollectionT>({
         path: "/Root/Content/sample/parkingplace/parkingplaces",
         requestInit: {
@@ -116,6 +128,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           reservationId: reservation?.Id,
           reservedBy: reservation?.ParkingPlaceUser,
           reservedByName: reservation?.ParkingPlaceUser?.DisplayName,
+          ownReservation: reservation?.ParkingPlaceUser?.Id === currentUserId,
         };
       });
 
@@ -132,7 +145,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
         return (
           <div key={slot.Id} className="slot">
             {slot.reserved ? (
-              <ReservedCard id={slot.reservationId} reservedByName={slot.reservedByName} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
+              <ReservedCard id={slot.reservationId} ownReservation={slot.ownReservation} reservedByName={slot.reservedByName} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
             ) : (
               <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction} />
             )}
