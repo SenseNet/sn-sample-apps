@@ -8,12 +8,13 @@ type ReservedSlotProps = {
   id: number | undefined;
   displayName: string;
   parkingPlaceCode: string;
+  reservedByName: string | undefined;
   selectedSlot: number;
   setSelectedAction: (slot: any) => void;
   setSelectedSlot: (slot: number) => void;
 };
 
-function ReservedCard({ id, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot, setSelectedAction}: ReservedSlotProps) {
+function ReservedCard({ id, reservedByName, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot, setSelectedAction}: ReservedSlotProps) {
   const styles = UseStyles(ReservedCardSlotStyle);
   const { oidcUser } = useOidcAuthentication();
   
@@ -21,7 +22,7 @@ function ReservedCard({ id, displayName, parkingPlaceCode, selectedSlot, setSele
     setSelectedSlot(slot);
     setSelectedAction("cancel");
   }
-
+  console.log(reservedByName);
   return (
     <Box 
       sx={{
@@ -41,7 +42,8 @@ function ReservedCard({ id, displayName, parkingPlaceCode, selectedSlot, setSele
         style={{
           filter: id === selectedSlot ? 'contrast(50%)' : '',
         }}
-      />
+        title={reservedByName}
+      />      
     </Box>
   );
 }

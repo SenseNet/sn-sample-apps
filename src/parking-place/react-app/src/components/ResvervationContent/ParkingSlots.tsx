@@ -24,7 +24,7 @@ type ReservationsCollectionT = {
   Name: string;
   Type: string;
   ParkingPlace: any;
-  User: string;
+  ParkingPlaceUser: any;
   ParkingPlaceBookingStart: string;
   ParkingPlaceBookingEnd: string;  
 };
@@ -41,6 +41,8 @@ type SlotsCollectionT = {
 type SlotData = SlotsCollectionT & {
   reserved?: boolean;
   reservationId?: number;
+  reservedBy?: number;
+  reservedByName?: string;
 };
 
 function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction}: ParkingSlotsProps) {
@@ -77,8 +79,8 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           signal: ac.signal,
         },
         oDataOptions: {
-          select: ["ParkingPlace", "ParkingPlaceBookingStart", "User"],
-          expand: ["ParkingPlace"],
+          select: ["ParkingPlace", "ParkingPlaceBookingStart", "ParkingPlaceUser"],
+          expand: ["ParkingPlace", "ParkingPlaceUser"],
           query: `ParkingPlaceBookingStart:['${selectedDate.format(
             "YYYY-MM-DD 00:00:00"
           )}' TO '${selectedDate
@@ -115,6 +117,8 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           ...slot,
           reserved: !!reservation,
           reservationId: reservation?.Id,
+          reservedBy: reservation?.ParkingPlaceUser,
+          reservedByName: reservation?.ParkingPlaceUser?.DisplayName,
         };
       });
 
@@ -131,7 +135,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
         return (
           <div key={slot.Id} className="slot">
             {slot.reserved ? (
-              <ReservedCard id={slot.reservationId} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
+              <ReservedCard id={slot.reservationId} reservedByName={slot.reservedByName} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
             ) : (
               <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction} />
             )}
