@@ -9,6 +9,7 @@ import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 type ConfirmProps = {
   selectedSlot: any;
   resetSelectedSlot: (slot: any) => void;
+  selectedAction: string;
   selectedDate: any;
 };
 
@@ -21,10 +22,10 @@ function Confirm(props: ConfirmProps) {
   interface ParkingPlaceBookingContent extends GenericContent {
     ParkingPlace: number;
     ParkingPlaceBookingStart: any;
-    ParkingPlaceUser: any;
+    ParkingPlaceUser: number;
   }
 
-  async function updateReservation(selectedSlot: any, resetSelectedSlot: any) {
+  async function updateReservation(selectedSlot: number, resetSelectedSlot: any, selectedAction: string) {
     const response = await repository.post<ParkingPlaceBookingContent>({
       parentPath: "/Root/Content/sample/parkingplace/bookings",
       contentType: 'ParkingPlaceBooking',      
@@ -40,7 +41,7 @@ function Confirm(props: ConfirmProps) {
   }
 
   function handleConfirmation() {
-    updateReservation(props.selectedSlot, props.resetSelectedSlot);
+    updateReservation(props.selectedSlot, props.resetSelectedSlot, props.selectedAction);
   }
   
   console.log('to be confirmed:', props.selectedSlot, props.selectedDate);
@@ -58,7 +59,7 @@ function Confirm(props: ConfirmProps) {
       }}
       onClick={props.selectedSlot ? handleConfirmation : undefined}
       className={props.selectedSlot ? "" : "disabled"}>
-      Confirm
+      {props.selectedAction}
     </Box>
   );
 }

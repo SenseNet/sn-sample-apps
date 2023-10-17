@@ -9,20 +9,21 @@ type EmptySlotProps = {
   displayName: string;
   parkingPlaceCode: string;
   selectedSlot: number;
-  setSelectedSlot: (slot: any) => void;
+  setSelectedAction: (slot: any) => void;
+  setSelectedSlot: (slot: number) => void;
 };
 
-function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot }: EmptySlotProps) {
+function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelectedSlot, setSelectedAction }: EmptySlotProps) {
   const styles = UseStyles(EmptySlotStyles);
   const { oidcUser } = useOidcAuthentication();
   
   function handleSlotSelection(slot: any) {
     setSelectedSlot(slot);
+    setSelectedAction("reserve");
   }
 
   return (
     <Box 
-      // sx={styles.root} 
       sx={{
         ...styles.root,
         ...(id === selectedSlot ? {borderColor:"darkcyan", color:"darkcyan"} : {}),

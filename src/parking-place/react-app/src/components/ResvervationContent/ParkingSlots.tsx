@@ -13,7 +13,8 @@ import { setDate } from "date-fns";
 
 type ParkingSlotsProps = {
   selectedDate: dayjs.Dayjs;
-  selectedSlot: any;
+  selectedSlot: number;
+  setSelectedAction: (slot: any) => void;
   setSelectedSlot: (slot: any) => void;
 };
 
@@ -41,7 +42,7 @@ type SlotData = SlotsCollectionT & {
   reserved?: boolean;
 };
 
-function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot }: ParkingSlotsProps) {
+function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction}: ParkingSlotsProps) {
   const repo = useRepository();
   
   const [data, setData] = useState<Array<SlotData>>([]);
@@ -128,9 +129,9 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot }: ParkingSl
         return (
           <div key={slot.Id} className="slot">
             {slot.reserved ? (
-              <ReservedCard />
+              <ReservedCard id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
             ) : (
-              <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} />
+              <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction} />
             )}
           </div>
         );

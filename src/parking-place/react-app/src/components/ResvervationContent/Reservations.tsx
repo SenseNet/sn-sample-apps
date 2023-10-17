@@ -9,7 +9,8 @@ import dayjs from "dayjs";
 
 function Reservations() {
   const styles = UseStyles(ReservationStyles);
-  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedAction, setSelectedAction] = useState("reserve");
+  const [selectedSlot, setSelectedSlot] = useState(0);
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
     dayjs(new Date())
   );
@@ -22,9 +23,9 @@ function Reservations() {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
-        <ParkingSlots selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />
+        <ParkingSlots selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} selectedDate={selectedDate} setSelectedAction={setSelectedAction} />
       </div>
-      <Confirm selectedSlot={selectedSlot} resetSelectedSlot={setSelectedSlot} selectedDate={selectedDate} />;
+      <Confirm selectedSlot={selectedSlot} resetSelectedSlot={setSelectedSlot} selectedDate={selectedDate} selectedAction={selectedAction} />;
     </Box>
   );
 }
