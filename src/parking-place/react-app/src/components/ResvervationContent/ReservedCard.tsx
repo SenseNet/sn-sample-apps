@@ -22,7 +22,7 @@ function ReservedCard({ id, reservedByName, displayName, parkingPlaceCode, selec
     setSelectedSlot(slot);
     setSelectedAction("cancel");
   }
-  console.log(reservedByName);
+  
   return (
     <Box 
       sx={{

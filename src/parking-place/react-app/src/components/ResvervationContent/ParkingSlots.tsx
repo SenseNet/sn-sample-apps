@@ -71,7 +71,6 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           enableautofilters: true,
         },
       });
-      console.log('slots', slots.d.results)
 
       const reservations = await repo.loadCollection<ReservationsCollectionT>({
         path: "/Root/Content/sample/parkingplace/bookings",
@@ -89,7 +88,6 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           enableautofilters: true,
         },
       });
-      console.log('reservations', reservations.d.results)
 
       /*filter restion.d.result with StartDate equal selected date*/
 
@@ -106,7 +104,6 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
       //     );
       //   }
       // );
-      // console.log('filteredReservations', filteredReservations)
 
       // set reserved slots
       const updatedSlots = slots.d.results.map((slot) => {

@@ -28,7 +28,7 @@ function Confirm(props: ConfirmProps) {
   async function updateReservation(selectedSlot: number, resetSelectedSlot: any, selectedAction: string) {
     switch (selectedAction) {
       case "reserve": {
-        const response = await repository.post<ParkingPlaceBookingContent>({
+        await repository.post<ParkingPlaceBookingContent>({
           parentPath: "/Root/Content/sample/parkingplace/bookings",
           contentType: 'ParkingPlaceBooking',      
           content: {
@@ -39,17 +39,15 @@ function Confirm(props: ConfirmProps) {
         }).then(() => {
           resetSelectedSlot(null);
         });
-        console.log(response);
         break;
       }
       case "cancel": {
-        const response = await repository.delete({
+        await repository.delete({
           idOrPath: selectedSlot,
         })
         .then(() => {
           resetSelectedSlot(null);
         });
-        console.log(response);
         break;
       }
     }
@@ -61,8 +59,6 @@ function Confirm(props: ConfirmProps) {
     updateReservation(props.selectedSlot, props.resetSelectedSlot, props.selectedAction);
   }
   
-  console.log('to be confirmed:', props.selectedSlot, props.selectedDate);
-
   if (!oidcUser) return null;
       
   return (
