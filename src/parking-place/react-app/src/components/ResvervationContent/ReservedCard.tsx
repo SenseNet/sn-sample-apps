@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 type ReservedSlotProps = {
-  id: number;
+  id: number | undefined;
   displayName: string;
   parkingPlaceCode: string;
   selectedSlot: number;

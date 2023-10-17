@@ -40,6 +40,7 @@ type SlotsCollectionT = {
 
 type SlotData = SlotsCollectionT & {
   reserved?: boolean;
+  reservationId?: number;
 };
 
 function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction}: ParkingSlotsProps) {
@@ -113,6 +114,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
         return {
           ...slot,
           reserved: !!reservation,
+          reservationId: reservation?.Id,
         };
       });
 
@@ -129,7 +131,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
         return (
           <div key={slot.Id} className="slot">
             {slot.reserved ? (
-              <ReservedCard id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
+              <ReservedCard id={slot.reservationId} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction}/>
             ) : (
               <EmptySlot id={slot.Id} displayName={slot.DisplayName} parkingPlaceCode={slot.ParkingPlaceCode} selectedSlot={selectedSlot} setSelectedSlot={setSelectedSlot} setSelectedAction={setSelectedAction} />
             )}

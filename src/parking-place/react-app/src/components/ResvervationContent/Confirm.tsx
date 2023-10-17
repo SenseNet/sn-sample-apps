@@ -26,18 +26,35 @@ function Confirm(props: ConfirmProps) {
   }
 
   async function updateReservation(selectedSlot: number, resetSelectedSlot: any, selectedAction: string) {
-    const response = await repository.post<ParkingPlaceBookingContent>({
-      parentPath: "/Root/Content/sample/parkingplace/bookings",
-      contentType: 'ParkingPlaceBooking',      
-      content: {
-        ParkingPlace: selectedSlot,
-        ParkingPlaceBookingStart: props.selectedDate,
-        // ParkingPlaceUser: ?
-      },
-    }).then(() => {
-      resetSelectedSlot(null);
-    });
-    console.log(response);
+    switch (selectedAction) {
+      case "reserve": {
+        const response = await repository.post<ParkingPlaceBookingContent>({
+          parentPath: "/Root/Content/sample/parkingplace/bookings",
+          contentType: 'ParkingPlaceBooking',      
+          content: {
+            ParkingPlace: selectedSlot,
+            ParkingPlaceBookingStart: props.selectedDate,
+            // ParkingPlaceUser: ?
+          },
+        }).then(() => {
+          resetSelectedSlot(null);
+        });
+        console.log(response);
+        break;
+      }
+      case "cancel": {
+        const response = await repository.delete({
+          idOrPath: selectedSlot,
+        })
+        .then(() => {
+          resetSelectedSlot(null);
+        });
+        console.log(response);
+        break;
+      }
+    }
+
+    
   }
 
   function handleConfirmation() {
