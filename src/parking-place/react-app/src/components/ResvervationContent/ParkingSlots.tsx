@@ -16,6 +16,7 @@ type ParkingSlotsProps = {
   selectedSlot: number;
   setSelectedAction: (slot: any) => void;
   setSelectedSlot: (slot: any) => void;
+  currentUserId: number | undefined;
 };
 
 type ReservationsCollectionT = {
@@ -46,8 +47,8 @@ type SlotData = SlotsCollectionT & {
   ownReservation: boolean;
 };
 
-function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction}: ParkingSlotsProps) {
-  const repo = useRepository();
+function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelectedAction, currentUserId}: ParkingSlotsProps) {
+  const repository = useRepository();
 
   const [data, setData] = useState<Array<SlotData>>([]);
 
@@ -57,22 +58,22 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
 
   useEffect(() => {
     const ac = new AbortController();
-    let currentUserId = 0;
+    // let currentUserId = 0;
     const parkingSLots = async () => {
-      const domain = repo.configuration.repositoryUrl;      
-      const userResponse = await fetch(`${domain}/odata.svc/content(2)/GetCurrentUser?metadata=no&$Select=Id,DisplayName`, {
-        headers: {
-          Authorization: `Bearer ${repo.configuration.token}`,
-        },
-      });
-      await userResponse.json().then(rp => {
-        const currentUser = rp.d;
-        currentUserId = currentUser.Id;
-        // setCurrentUser(currentUser);
-        console.log(currentUser);
-      });      
+      // const domain = repo.configuration.repositoryUrl;      
+      // const userResponse = await fetch(`${domain}/odata.svc/content(2)/GetCurrentUser?metadata=no&$Select=Id,DisplayName`, {
+      //   headers: {
+      //     Authorization: `Bearer ${repo.configuration.token}`,
+      //   },
+      // });
+      // await userResponse.json().then(rp => {
+      //   const currentUser = rp.d;
+      //   currentUserId = currentUser.Id;
+      //   // setCurrentUser(currentUser);
+      //   console.log(currentUser);
+      // });
       
-      const slots = await repo.loadCollection<SlotsCollectionT>({
+      const slots = await repository.loadCollection<SlotsCollectionT>({
         path: "/Root/Content/sample/parkingplace/parkingplaces",
         requestInit: {
           signal: ac.signal,
@@ -84,7 +85,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
         },
       });
 
-      const reservations = await repo.loadCollection<ReservationsCollectionT>({
+      const reservations = await repository.loadCollection<ReservationsCollectionT>({
         path: "/Root/Content/sample/parkingplace/bookings",
         requestInit: {
           signal: ac.signal,
@@ -131,12 +132,13 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           ownReservation: reservation?.ParkingPlaceUser?.Id === currentUserId,
         };
       });
+      console.log(updatedSlots, currentUserId);
 
       setData(updatedSlots);
     };
 
     parkingSLots();
-  }, [repo, selectedSlot, selectedDate]);
+  }, [repository, selectedSlot, selectedDate, currentUserId]);
 
   const styles = UseStyles(ParkingSlotsStyles);
   return (

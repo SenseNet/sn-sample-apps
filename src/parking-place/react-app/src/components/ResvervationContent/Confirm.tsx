@@ -11,6 +11,7 @@ type ConfirmProps = {
   resetSelectedSlot: (slot: any) => void;
   selectedAction: string;
   selectedDate: any;
+  currentUserId: number | undefined;
 };
 
 function Confirm(props: ConfirmProps) {
@@ -25,7 +26,7 @@ function Confirm(props: ConfirmProps) {
     ParkingPlaceUser: number;
   }
 
-  async function updateReservation(selectedSlot: number, resetSelectedSlot: any, selectedAction: string) {
+  async function updateReservation(selectedSlot: number, resetSelectedSlot: any, selectedAction: string, currentUserId: number = 0) {
     switch (selectedAction) {
       case "reserve": {
         await repository.post<ParkingPlaceBookingContent>({
@@ -34,7 +35,7 @@ function Confirm(props: ConfirmProps) {
           content: {
             ParkingPlace: selectedSlot,
             ParkingPlaceBookingStart: props.selectedDate,
-            // ParkingPlaceUser: ?
+            ParkingPlaceUser: currentUserId,
           },
         }).then(() => {
           resetSelectedSlot(null);
@@ -52,12 +53,10 @@ function Confirm(props: ConfirmProps) {
         break;
       }
     }
-
-    
   }
 
   function handleConfirmation() {
-    updateReservation(props.selectedSlot, props.resetSelectedSlot, props.selectedAction);
+    updateReservation(props.selectedSlot, props.resetSelectedSlot, props.selectedAction, props.currentUserId);
   }
   
   if (!oidcUser) return null;
