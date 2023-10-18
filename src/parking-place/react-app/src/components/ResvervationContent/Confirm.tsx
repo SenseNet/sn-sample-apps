@@ -44,6 +44,7 @@ function Confirm(props: ConfirmProps) {
       case "cancel": {
         await repository.delete({
           idOrPath: selectedSlot,
+          permanent: true,
         })
         .then(() => {
           resetSelectedSlot(null);
