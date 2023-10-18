@@ -38,6 +38,11 @@ export const ReservationStyles = (
         maxWidth: 700,
       },
     },
+    "& .welcome-message": {      
+      display: "flex",
+      flexDirection: "column",      
+      alignItems: "center",
+    },
   },
 });
 
