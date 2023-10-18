@@ -14,7 +14,7 @@ function Reservations() {
   const styles = UseStyles(ReservationStyles);
   const { oidcUser } = useOidcAuthentication();
   const [currentUser, setCurrentUser] = useState<User>();
-  const [selectedAction, setSelectedAction] = useState("reserve");
+  const [selectedAction, setSelectedAction] = useState("Reserve");
   const [selectedSlot, setSelectedSlot] = useState(0);
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(
     dayjs(new Date())

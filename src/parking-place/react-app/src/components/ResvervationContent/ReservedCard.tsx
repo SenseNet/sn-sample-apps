@@ -21,7 +21,7 @@ function ReservedCard({ id, ownReservation, reservedByName, displayName, parking
   
   function handleSlotSelection(slot: any) {
     setSelectedSlot(slot);
-    setSelectedAction("cancel");
+    setSelectedAction("Cancel");
   }
 
   function colorizeSvg(selected: boolean, ownReservation: boolean) {

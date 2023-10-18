@@ -19,7 +19,7 @@ function EmptySlot({ id, displayName, parkingPlaceCode, selectedSlot, setSelecte
   
   function handleSlotSelection(slot: any) {
     setSelectedSlot(slot);
-    setSelectedAction("reserve");
+    setSelectedAction("Reserve");
   }
 
   return (
