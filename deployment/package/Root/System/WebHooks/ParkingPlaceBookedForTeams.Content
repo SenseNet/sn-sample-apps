@@ -1,0 +1,18 @@
+{
+  "ContentType": "WebHookSubscription",
+  "ContentName": "ParkingPlaceBookedForTeams",
+  "Fields": {
+    "Name": "ParkingPlaceBookedForTeams",
+    "WebHookHttpMethod": [
+      "POST"
+    ],
+    "WebHookUrl": "http://example.com",
+    "WebHookFilter": "{\"Path\":\"/Root/Content/sample/parkingplace/bookings\",\"TriggersForAllEvents\":false,\"ContentTypes\":[{\"Name\":\"ParkingPlaceBooking\",\"Events\":[\"Create\"]}]}",
+    "Enabled": false,
+    "IsValid": true,
+    "InvalidFields": "",
+    "SuccessfulCalls": 0,
+    "DisplayName": "ParkingPlaceBookedForTeams",
+    "WebHookPayload": "{\n    \"@type\": \"MessageCard\",\n    \"@context\": \"http://schema.org/extensions\",\n    \"themeColor\": \"0076D7\",\n    \"summary\": \"@@content.ParkingPlaceUser.FullName@@ booked a parking place\",\n    \"sections\": [{\n        \"activityTitle\": \"@@content.ParkingPlaceUser.FullName@@ booked a parking place\",\n        \"activitySubtitle\": \"for @@content.ParkingPlaceBookingStart@@ in repository @@repository@@\",\n        \"activityImage\": \"https://raw.githubusercontent.com/SenseNet/sn-resources/master/images/sn-icon/sensenet-icon-64.png\",\n        \"facts\": [{\n            \"name\": \"Repository\",\n            \"value\": \"@@repository@@\"\n        }, {\n            \"name\": \"User\",\n            \"value\": \"@@content.ParkingPlaceUser.FullName@@ (@@content.ParkingPlaceUser.LoginName@@)\"\n        }, {\n            \"name\": \"Booked date\",\n            \"value\": \"@@content.ParkingPlaceBookingStart@@\"\n        }, {\n            \"name\": \"Parking place code\",\n            \"value\": \"@@content.ParkingPlace.ParkingPlaceCode@@\"\n        }],\n        \"markdown\": true\n    }],\n    \"potentialAction\": [{\n        \"@type\": \"OpenUri\",\n        \"name\": \"Learn More\",\n        \"targets\": [{\n            \"os\": \"default\",\n            \"uri\": \"https://sensenet.com\"\n        }]\n    }]\n}"
+  }
+}
