@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRepository } from "@sensenet/hooks-react";
 import { Box } from "@mui/material";
 import { UseStyles } from "../../hooks/useStyles";
 import { ParkingSlotsStyles } from "./stlyes";
 import EmptySlot from "./EmptySlot";
 import ReservedCard from "./ReservedCard";
-import { useQuery } from "@tanstack/react-query";
-import fetchSlots from "../../fetches/fetchSlots";
 import dayjs from "dayjs";
-import { type } from "os";
-import { setDate } from "date-fns";
 
 type ParkingSlotsProps = {
   selectedDate: dayjs.Dayjs;
