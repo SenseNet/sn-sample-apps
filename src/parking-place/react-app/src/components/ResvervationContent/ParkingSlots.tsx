@@ -58,21 +58,7 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
 
   useEffect(() => {
     const ac = new AbortController();
-    // let currentUserId = 0;
     const parkingSLots = async () => {
-      // const domain = repo.configuration.repositoryUrl;      
-      // const userResponse = await fetch(`${domain}/odata.svc/content(2)/GetCurrentUser?metadata=no&$Select=Id,DisplayName`, {
-      //   headers: {
-      //     Authorization: `Bearer ${repo.configuration.token}`,
-      //   },
-      // });
-      // await userResponse.json().then(rp => {
-      //   const currentUser = rp.d;
-      //   currentUserId = currentUser.Id;
-      //   // setCurrentUser(currentUser);
-      //   console.log(currentUser);
-      // });
-      
       const slots = await repository.loadCollection<SlotsCollectionT>({
         path: "/Root/Content/sample/parkingplace/parkingplaces",
         requestInit: {
@@ -132,7 +118,6 @@ function ParkingSlots({ selectedDate, selectedSlot, setSelectedSlot, setSelected
           ownReservation: reservation?.ParkingPlaceUser?.Id === currentUserId,
         };
       });
-      console.log(updatedSlots, currentUserId);
 
       setData(updatedSlots);
     };

@@ -18,8 +18,7 @@ function Confirm(props: ConfirmProps) {
   const repository = useRepository();
   const { oidcUser } = useOidcAuthentication();
   const styles = UseStyles(ConfirmButton);
-  
-  
+    
   interface ParkingPlaceBookingContent extends GenericContent {
     ParkingPlace: number;
     ParkingPlaceBookingStart: any;

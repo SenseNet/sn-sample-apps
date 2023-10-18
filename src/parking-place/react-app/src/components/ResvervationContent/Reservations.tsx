@@ -4,11 +4,11 @@ import { ReservationStyles } from "./stlyes";
 import { Box } from "@mui/material";
 import ParkingSlots from "./ParkingSlots";
 import Confirm from "./Confirm";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 import { useRepository } from "@sensenet/hooks-react";
-import { GenericContent, User } from '@sensenet/default-content-types'
+import { User } from '@sensenet/default-content-types'
 
 function Reservations() {
   const styles = UseStyles(ReservationStyles);
@@ -30,10 +30,8 @@ function Reservations() {
         },
       });
       
-      await userResponse.json().then(rp => {
-        const cu = rp.d;
-        console.log(cu);
-        setCurrentUser(cu);
+      await userResponse.json().then(resp => {
+        setCurrentUser(resp.d);
       });   
     };
 
