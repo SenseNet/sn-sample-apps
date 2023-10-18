@@ -4,7 +4,6 @@ import { UseStyles } from "../../hooks/useStyles";
 import { ConfirmButton } from "./stlyes";
 import { useRepository } from '@sensenet/hooks-react';
 import { GenericContent } from '@sensenet/default-content-types'
-import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 
 type ConfirmProps = {
   selectedSlot: any;
@@ -16,7 +15,6 @@ type ConfirmProps = {
 
 function Confirm(props: ConfirmProps) {
   const repository = useRepository();
-  const { oidcUser } = useOidcAuthentication();
   const styles = UseStyles(ConfirmButton);
     
   interface ParkingPlaceBookingContent extends GenericContent {
@@ -57,8 +55,6 @@ function Confirm(props: ConfirmProps) {
   function handleConfirmation() {
     updateReservation(props.selectedSlot, props.resetSelectedSlot, props.selectedAction, props.currentUserId);
   }
-  
-  if (!oidcUser) return null;
       
   return (
     <Box 
