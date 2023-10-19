@@ -1,6 +1,7 @@
-﻿using SenseNet.Client;
+﻿using Microsoft.Extensions.Logging;
+using SenseNet.Client;
 
-namespace ParkingPlaceEventHandler;
+namespace ParkingPlaceEventHandler.Services;
 
 public class ParkingPlaceBooking : Content
 {

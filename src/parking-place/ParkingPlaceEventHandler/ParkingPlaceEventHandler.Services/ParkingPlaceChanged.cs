@@ -1,4 +1,4 @@
-﻿namespace ParkingPlaceEventHandler;
+﻿namespace ParkingPlaceEventHandler.Services;
 
 public class ParkingPlaceChanged
 {

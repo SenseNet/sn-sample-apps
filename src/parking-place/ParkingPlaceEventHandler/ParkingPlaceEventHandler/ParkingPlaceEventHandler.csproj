@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="SenseNet.Client.WebApi" Version="0.0.0.1" />
-	<PackageReference Include="SenseNet.Tools" Version="3.2.11.1" />
+	<PackageReference Include="SenseNet.Client.WebApi" Version="0.0.1" />
+	<PackageReference Include="SenseNet.Tools" Version="3.2.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ParkingPlaceEventHandler.Services\ParkingPlaceEventHandler.Services.csproj" />
   </ItemGroup>
 
 </Project>
