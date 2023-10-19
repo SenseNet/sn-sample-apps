@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ParkingPlaceEventHandler;
+using ParkingPlaceEventHandler.Services;
 using SenseNet.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);

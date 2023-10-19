@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SenseNet.Client;
 using SenseNet.Client.WebApi;
 using SenseNet.Tools.Mail;
 
-namespace ParkingPlaceEventHandler;
+namespace ParkingPlaceEventHandler.Services;
 
 public class ParkingPlaceService
 {
@@ -104,8 +106,7 @@ public class ParkingPlaceService
                            $"+ParkingPlaceBookingStart:<'{date.AddDays(1):yyyy-MM-dd}'",
         }, cancel);
     }
-
-
+    
     private async Task SendMailAsync(int contentCount, ParkingPlaceBooking currentBooking, 
         CancellationToken cancel)
     {
