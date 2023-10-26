@@ -33,7 +33,9 @@ export const AuthProvider = ({ children }: contextProps) => {
   };
   return (
     <AuthenticationProvider
-      notAuthenticated={() => <NotAuthenticatedOverride />}
+      notAuthenticated={() => {
+        return <NotAuthenticatedOverride />;
+      }}
       configuration={configuration}
       history={history}
     >
