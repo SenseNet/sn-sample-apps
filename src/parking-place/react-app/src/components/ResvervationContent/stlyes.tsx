@@ -38,9 +38,9 @@ export const ReservationStyles = (
         maxWidth: 700,
       },
     },
-    "& .welcome-message": {      
+    "& .welcome-message": {
       display: "flex",
-      flexDirection: "column",      
+      flexDirection: "column",
       alignItems: "center",
     },
   },
@@ -56,7 +56,7 @@ export const DatePickerStyles = (
       minHeight: "200px",
     },
     "& .MuiPickersDay-root.Mui-disabled": {
-      opacity: 0,
+      opacity: 0.5,
     },
     "& .MuiPickersDay-dayOutsideMonth": {
       color: "#000000",
