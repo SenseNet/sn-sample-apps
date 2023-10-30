@@ -42,6 +42,16 @@ export const AuthProvider = ({ children }: contextProps) => {
 export const RepositoryProvider = ({ children }: contextProps) => {
   const { oidcUser } = useOidcAuthentication();
 
+  if (!oidcUser) {
+    return (
+      <RepositoryContext.Provider
+      value={new Repository({ repositoryUrl })}
+    >
+      {children}
+    </RepositoryContext.Provider>    
+    );
+  }
+
   return (
     <RepositoryContext.Provider
       value={
