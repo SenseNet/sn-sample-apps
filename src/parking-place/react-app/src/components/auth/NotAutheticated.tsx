@@ -1,10 +1,9 @@
-import { useEffect } from "react";
-import { redirect } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export const NotAuthenticatedOverride = () => {
-  useEffect(() => {
-    redirect("/");
-  }, []);
+  const navigate = useNavigate();
+
+  navigate("/");
 
   return null;
 };
