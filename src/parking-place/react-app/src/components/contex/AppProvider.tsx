@@ -32,13 +32,7 @@ export const AuthProvider = ({ children }: contextProps) => {
     push: navigate,
   };
   return (
-    <AuthenticationProvider
-      notAuthenticated={() => {
-        return <NotAuthenticatedOverride />;
-      }}
-      configuration={configuration}
-      history={history}
-    >
+    <AuthenticationProvider configuration={configuration} history={history}>
       {children}
     </AuthenticationProvider>
   );

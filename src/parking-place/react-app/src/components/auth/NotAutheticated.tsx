@@ -1,11 +1,6 @@
-import { useNavigate } from "react-router-dom";
-
 export const NotAuthenticatedOverride = () => {
-  const navigate = useNavigate();
-
-  console.log("NotAuthenticatedOverride");
-
-  navigate("/");
+  //refresh the page
+  window.location.reload();
 
   return null;
 };
