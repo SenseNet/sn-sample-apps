@@ -7,7 +7,6 @@ import { Repository } from "@sensenet/client-core";
 import { RepositoryContext } from "@sensenet/hooks-react";
 import { configuration, repositoryUrl } from "../../utils/configurations";
 import { BrowserRouter, useHistory } from "react-router-dom";
-import { NotAuthenticatedOverride } from "../auth/NotAutheticated";
 
 type contextProps = {
   children: ReactNode;
@@ -24,16 +23,9 @@ export function AppProviders({ children }: contextProps) {
 }
 
 export const AuthProvider = ({ children }: contextProps) => {
-  // const location = useLocation();
-  // const navigate = useNavigate();
-
   const history = useHistory();
   return (
-    <AuthenticationProvider
-      notAuthenticated={() => <NotAuthenticatedOverride />}
-      configuration={configuration}
-      history={history}
-    >
+    <AuthenticationProvider configuration={configuration} history={history}>
       {children}
     </AuthenticationProvider>
   );
