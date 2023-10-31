@@ -15,4 +15,5 @@ export const configuration = {
   extraQueryParams: { snrepo: repositoryUrl },
 };
 
-export const adminUrl = "https://admin.test.sensenet.com/";
+export const sensenetAdminUrl =
+  process.env.REACT_APP_AdminUrl || "https://admin.sensenet.com/";

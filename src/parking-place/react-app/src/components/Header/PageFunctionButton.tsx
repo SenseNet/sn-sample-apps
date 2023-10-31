@@ -4,6 +4,7 @@ import { Button, IconButton, Menu, MenuItem, useTheme } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { LoginButtonStyle } from "./styles";
 import { useRepository } from "@sensenet/hooks-react";
+import { sensenetAdminUrl } from "../../utils/configurations";
 
 function PageFunctionsButton() {
   const { oidcUser, login, logout } = useOidcAuthentication();
@@ -19,9 +20,7 @@ function PageFunctionsButton() {
   };
 
   const handleOpenRepo = () => {
-    const url = new URL(
-      process.env.REACT_APP_AdminUrl || "https://admin.sensenet.com/"
-    );
+    const url = new URL(process.env.REACT_APP_AdminUrl || sensenetAdminUrl);
 
     url.searchParams.append(
       "repoUrl",
