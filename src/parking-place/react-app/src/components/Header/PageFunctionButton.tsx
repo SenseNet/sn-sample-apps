@@ -19,7 +19,9 @@ function PageFunctionsButton() {
   };
 
   const handleOpenRepo = () => {
-    const url = new URL(process.env.REACT_APP_AdminUrl || "");
+    const url = new URL(
+      process.env.REACT_APP_AdminUrl || "https://admin.sensenet.com/"
+    );
 
     url.searchParams.append(
       "repoUrl",
