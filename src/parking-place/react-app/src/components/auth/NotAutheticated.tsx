@@ -1,10 +1,8 @@
 import { useEffect } from "react";
+import { redirect } from "react-router";
 
 export const NotAuthenticatedOverride = () => {
-  useEffect(() => {
-    console.log("Redirecting");
-    window.location.replace("/");
-  }, []);
+  redirect("/");
 
   return null;
 };

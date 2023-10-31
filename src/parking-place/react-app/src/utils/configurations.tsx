@@ -11,3 +11,5 @@ export const configuration = {
   silent_redirect_uri: `${window.location.origin}/authentication/silent_callback`,
   extraQueryParams: { snrepo: repositoryUrl },
 };
+
+export const adminUrl = "https://admin.test.sensenet.com/";
