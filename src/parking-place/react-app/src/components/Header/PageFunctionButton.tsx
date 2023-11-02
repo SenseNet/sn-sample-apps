@@ -19,6 +19,10 @@ function PageFunctionsButton() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleOpenRepo = () => {
     const url = new URL(process.env.REACT_APP_AdminUrl || sensenetAdminUrl);
 
@@ -64,7 +68,7 @@ function PageFunctionsButton() {
           horizontal: "right",
         }}
         open={Boolean(anchorEl)}
-        onClose={handleOpenRepo}
+        onClose={handleClose}
       >
         <MenuItem onClick={handleOpenRepo}>Open Repository</MenuItem>
         <MenuItem onClick={logout}>Log out</MenuItem>
