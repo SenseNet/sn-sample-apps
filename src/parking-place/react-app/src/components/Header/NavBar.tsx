@@ -2,7 +2,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import LoginButton from "./LoginButton";
+import PageFunctionsButton from "./PageFunctionButton";
 import { NavBarStyles } from "./styles";
 import { useTheme } from "@mui/material";
 
@@ -31,7 +31,7 @@ export default function NavBar() {
           loading="eager"
         />
 
-        <LoginButton />
+        <PageFunctionsButton />
       </Toolbar>
     </AppBar>
   );
