@@ -4,7 +4,7 @@ export const repositoryUrl =
 export const configuration = {
   client_id: process.env.REACT_APP_ClientId || "TdDZR9am6OVoYQgZ", // clientID of your repository
   automaticSilentRenew: true,
-  redirect_uri: `${window.location.origin}/authentication/login_callback`,
+  redirect_uri: `${window.location.origin}/authentication/callback`,
   response_type: "code",
   post_logout_redirect_uri: `${window.location.origin}/`,
   scope: "openid profile sensenet",
