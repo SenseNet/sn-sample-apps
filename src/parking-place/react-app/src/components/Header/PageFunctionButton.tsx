@@ -3,11 +3,15 @@ import { useOidcAuthentication } from "@sensenet/authentication-oidc-react";
 import { Button, IconButton, Menu, MenuItem, useTheme } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { LoginButtonStyle } from "./styles";
+import { useRepository } from "@sensenet/hooks-react";
+import { sensenetAdminUrl } from "../../utils/configurations";
 
-function LoginButton() {
+function PageFunctionsButton() {
   const { oidcUser, login, logout } = useOidcAuthentication();
   const theme = useTheme();
   const styles = LoginButtonStyle(theme);
+
+  const repository = useRepository();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -16,6 +20,18 @@ function LoginButton() {
   };
 
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleOpenRepo = () => {
+    const url = new URL(process.env.REACT_APP_AdminUrl || sensenetAdminUrl);
+
+    url.searchParams.append(
+      "repoUrl",
+      encodeURI(repository.configuration.repositoryUrl)
+    );
+
+    window.open(url.toString(), "_blank");
     setAnchorEl(null);
   };
 
@@ -54,11 +70,11 @@ function LoginButton() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Open Repository</MenuItem>
+        <MenuItem onClick={handleOpenRepo}>Open Repository</MenuItem>
         <MenuItem onClick={logout}>Log out</MenuItem>
       </Menu>
     </>
   );
 }
 
-export default LoginButton;
+export default PageFunctionsButton;
